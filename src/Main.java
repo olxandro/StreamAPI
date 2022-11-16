@@ -1,3 +1,8 @@
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -65,5 +70,15 @@ public class Main {
         Matcher m = pattern.matcher("10 20 30");
         m.results().forEachOrdered(mr -> System.out.println(mr.group()));
         System.out.println();
+
+        //Для создания потока строк из файла предназначен статический метод lines () из
+        //класса Files.
+        Path рat = Paths.get("С:Wbook\\cpl251.txt");
+        try (Stream<String> streamStr = Files.lines(рat, Charset.forName("cp1251"))) {
+            streamStr.forEachOrdered(System.out::println);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
